@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Men</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('logo.jpg') center/cover fixed;
+      backdrop-filter: blur(5px);
+      animation: changeBackground 15s linear infinite;
+    }
+
+    @keyframes changeBackground {
+      0% {
+        background-image: url('logo.jpg');
+      }
+      25% {
+        background-image: url('10.jpg');
+      }
+      50% {
+        background-image: url('11.jpg');
+      }
+      75% {
+        background-image: url('12.jpg');
+      }
+      100% {
+        background-image: url('13.jpg');
+      }
+    }
+
+    .menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .menu-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 20px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      filter: blur(5px);
+      pointer-events: none; 
+    }
+
+    .menu-button img {
+      width: 90%;
+      height: auto;
+      border-radius: 50%;
+    }
+
+    .menu-button::before {
+      content: "";
+      position: absolute;
+      top: -5%;
+      left: -5%;
+      width: 110%;
+      height: 110%;
+      border: 5px solid transparent;
+      border-radius: 50%;
+      background: linear-gradient(45deg, blue, yellow, red, blue, yellow, red);
+      animation: rotateColors 3s linear infinite;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .menu-button:hover::before {
+      opacity: 1;
+    }
+
+    @keyframes rotateColors {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .menu-button:hover {
+      background-color: transparent;
+    }
+
+    .login-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .login-box {
+      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      0% {
+        transform: translate(0%, 50%);
+        opacity: 0;
+      }
+      100% {
+        transform: translate(0%, 0%);
+        opacity: 1;
+      }
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 10px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="menu">
+  <a href="presentacion.html" class="menu-button"><img src="imagen1.png" alt="Imagen 1"></a>
+  <a href="2.html" class="menu-button"><img src="2.jpg" alt="Imagen 2"></a>
+  <a href="3.html" class="menu-button"><img src="3.jpg" alt="Imagen 3"></a>
+  <a href="4.html" class="menu-button"><img src="4.jpg" alt="Imagen 4"></a>
+</div>
+
+<div class="login-container">
+  <div class="login-box">
+    <h2>Iniciar Sesión</h2>
+    <input type="text" id="username" placeholder="Usuario">
+    <input type="password" id="password" placeholder="Contraseña">
+    <button onclick="login()">Ingresar</button>
+    <p id="error-message" class="error-message"></p>
+  </div>
+</div>
+<script>
+  function login() {
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    var errorMessage = document.getElementById('error-message');
+
+    if (username === 'grupo' && password === '123456') {
+      alert('Inicio de sesión exitoso');
+      document.querySelector('.login-container').style.display = 'none';
+      var buttons = document.querySelectorAll('.menu-button');
+      buttons.forEach(function(button) {
+        button.style.pointerEvents = 'auto';
+        button.style.filter = 'none'; 
+      });
+    } else {
+      errorMessage.textContent = 'Usuario o contraseña incorrectos';
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+    }
+  }
+</script>
+</body>
+</html>
+
